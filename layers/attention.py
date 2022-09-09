@@ -7,7 +7,7 @@ import math
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-# a
+
 
 class Attention(nn.Module):
     def __init__(self, embed_dim, hidden_dim=None, out_dim=None, n_head=1, score_function='dot_product', dropout=0):
