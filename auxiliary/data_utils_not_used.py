@@ -177,7 +177,7 @@ class IOBDataset(Dataset):
         self.data = all_data
 
     def __getitem__(self, index):
-        return self.data[index]
+        return self.data [index] 
 
     def __len__(self):
         return len(self.data)
