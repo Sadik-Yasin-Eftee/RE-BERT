@@ -112,7 +112,7 @@ class Instructor:
 
         return path
 
-    def _evaluate_acc_f1(self, data_loader):
+    '''def _evaluate_acc_f1(self, data_loader):
         n_correct, n_total = 0, 0
         t_targets_all, t_outputs_all = None, None
         # switch model to evaluation mode
@@ -135,7 +135,7 @@ class Instructor:
 
         acc = n_correct / n_total
         f1 = metrics.f1_score(t_targets_all.cpu(), torch.argmax(t_outputs_all, -1).cpu(), labels=[0, 1, 2], average='macro')
-        return acc, f1
+        return acc, f1'''
 
     def run(self):
         # Loss and Optimizer
