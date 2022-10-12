@@ -18,7 +18,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, random_split
 
-from data_utils import build_tokenizer, build_embedding_matrix, Tokenizer4Bert, IOBDataset
+from data_utils import Tokenizer4Bert, IOBDataset
 from models.re_bert import RE_BERT
 from models.lcf_bert import LCF_BERT
 
