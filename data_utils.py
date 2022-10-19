@@ -50,7 +50,7 @@ class IOBDataset(Dataset):
         for i in range(0, len(lines), 3):
             text_left, _, text_right = [s.lower().strip() for s in lines[i].partition("$T$")]
             aspect = lines[i + 1].lower().strip()
-            requirement = lines[i + 2].strip()
+            requirements = lines[i + 2].strip()
 
             text_indices = tokenizer.text_to_sequence(text_left + " " + aspect + " " + text_right)
             context_indices = tokenizer.text_to_sequence(text_left + " " + text_right)
@@ -62,7 +62,7 @@ class IOBDataset(Dataset):
             left_len = np.sum(left_indices != 0)
             aspect_len = np.sum(aspect_indices != 0)
             aspect_boundary = np.asarray([left_len, left_len + aspect_len - 1], dtype=np.int64)
-            requirement = int(requirement) + 1
+            requirements = int(requirements) + 1
 
             text_len = np.sum(text_indices != 0)
             concat_bert_indices = tokenizer.text_to_sequence('[CLS] ' + text_left + " " + aspect + " " + text_right + ' [SEP] ' + aspect + " [SEP]")
@@ -86,7 +86,7 @@ class IOBDataset(Dataset):
                 'right_with_aspect_indices': right_with_aspect_indices,
                 'aspect_indices': aspect_indices,
                 'aspect_boundary': aspect_boundary,
-                'requirement': requirement,
+                'requirements': requirements,
             }
 
             all_data.append(data)
