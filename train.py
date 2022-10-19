@@ -84,7 +84,7 @@ class Instructor:
 
                 inputs = [batch[col].to(self.opt.device) for col in self.opt.inputs_cols]
                 outputs = self.model(inputs)
-                targets = batch['polarity'].to(self.opt.device)
+                targets = batch['requirement'].to(self.opt.device)
 
                 loss = criterion(outputs, targets)
                 loss.backward()
@@ -120,7 +120,7 @@ class Instructor:
         with torch.no_grad():
             for i_batch, t_batch in enumerate(data_loader):
                 t_inputs = [t_batch[col].to(self.opt.device) for col in self.opt.inputs_cols]
-                t_targets = t_batch['polarity'].to(self.opt.device)
+                t_targets = t_batch['requirement'].to(self.opt.device)
                 t_outputs = self.model(t_inputs)
 
                 n_correct += (torch.argmax(t_outputs, -1) == t_targets).sum().item()
@@ -166,7 +166,7 @@ def main():
     parser.add_argument('--bert_dim', default=768, type=int)
     parser.add_argument('--pretrained_bert_name', default='bert-base-uncased', type=str)
     parser.add_argument('--max_seq_len', default=80, type=int)
-    parser.add_argument('--polarities_dim', default=3, type=int)
+    parser.add_argument('--requirements_dim', default=3, type=int)
     parser.add_argument('--hops', default=3, type=int)
     parser.add_argument('--patience', default=5, type=int)
     parser.add_argument('--device', default=None, type=str, help='e.g. cuda:0')
