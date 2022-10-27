@@ -10,7 +10,7 @@ import nltk
 from tqdm import tqdm
 nltk.download('punkt')
 
-from data_utils import Tokenizer4Bert, pad_and_truncate
+from data_utils import build_tokenizer, build_embedding_matrix, Tokenizer4Bert, pad_and_truncate
 from models.re_bert import RE_BERT
 from models.lcf_bert import LCF_BERT
 
