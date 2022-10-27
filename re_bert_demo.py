@@ -10,7 +10,7 @@ import nltk
 from tqdm import tqdm
 nltk.download('punkt')
 
-from data_utils import build_tokenizer, build_embedding_matrix, Tokenizer4Bert, pad_and_truncate
+from data_utils import Tokenizer4Bert, pad_and_truncate
 from models.re_bert import RE_BERT
 from models.lcf_bert import LCF_BERT
 
@@ -181,7 +181,7 @@ def re_bert_model(options):
     parser.add_argument('--bert_dim', default=768, type=int)
     parser.add_argument('--pretrained_bert_name', default='bert-base-uncased', type=str)
     parser.add_argument('--max_seq_len', default=80, type=int)
-    parser.add_argument('--polarities_dim', default=3, type=int)
+    parser.add_argument('--requirement_dim', default=3, type=int)
     parser.add_argument('--hops', default=3, type=int)
     parser.add_argument('--patience', default=5, type=int)
     parser.add_argument('--device', default=None, type=str, help='e.g. cuda:0')
