@@ -34,4 +34,4 @@ class RE_BERT(LCF_BERT):
         self.linear_double = nn.Linear(opt.bert_dim * 2, opt.bert_dim)
         self.linear_single = nn.Linear(opt.bert_dim, opt.bert_dim)
         self.bert_pooler = BertPooler(bert.config)
-        self.dense = nn.Linear(opt.bert_dim, opt.requirement_dim)
+        self.dense = nn.Linear(opt.bert_dim, opt.polarities_dim)
