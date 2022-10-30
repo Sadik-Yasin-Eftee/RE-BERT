@@ -22,6 +22,17 @@ The first step in training your own model is to generate a training set in the B
 
 RE-BERT is under development. There may be unknown problems in the code and we hope to get your help to make it easier to use.
 
+### Contribution of this repository 
+
+This repository introduces some changes from the original repository ([available here](https://github.com/adailtonaraujo/RE-BERT)). Unused codes has been deleted and new codes and Jupyter Notebooks have been added. These new files present a possible way to apply the cross-validation process based on multiple domains and evaluate the model according to the article "RE-BERT: Automatic Extraction of Software Requirements
+from App Reviews using BERT Language Model".
+
+* New datasets for the Cross-Validation method
+* [Code to create files for the Cross-Validation method](create_files.py)
+* [Training models to Cross-Validation method (Notebook)](Cross_Validation.ipynb)
+* [Extracting requirements from models of the Cross-Validation method (Notebook)](Extracting_and_saving_requirements.ipynb)
+ 
+
 ### Related Repositories
 
 * [ABSA-PyTorch](https://github.com/songyouwei/ABSA-PyTorch)
