@@ -13,6 +13,7 @@ from transformers import BertTokenizer
 
 
 def pad_and_truncate(sequence, maxlen, dtype='int64', padding='post', truncating='post', value=0):
+    """Executes the padding and the truncation of the sequences"""
     x = (np.ones(maxlen) * value).astype(dtype)
     if truncating == 'pre':
         trunc = sequence[-maxlen:]
@@ -27,11 +28,13 @@ def pad_and_truncate(sequence, maxlen, dtype='int64', padding='post', truncating
 
 
 class Tokenizer4Bert:
+    """Imports and uses a pre-trained tokenizer"""
     def __init__(self, max_seq_len, pretrained_bert_name):
         self.tokenizer = BertTokenizer.from_pretrained(pretrained_bert_name)
         self.max_seq_len = max_seq_len
 
     def text_to_sequence(self, text, reverse=False, padding='post', truncating='post'):
+        """Converts a token ('string') to an id"""
         sequence = self.tokenizer.convert_tokens_to_ids(self.tokenizer.tokenize(text))
         if len(sequence) == 0:
             sequence = [0]
@@ -41,6 +44,7 @@ class Tokenizer4Bert:
 
 
 class IOBDataset(Dataset):
+    """Opens and read a file, executes the tokenization and prepares the data for training"""
     def __init__(self, fname, tokenizer):
         fin = open(fname, 'r', encoding='utf-8', newline='\n', errors='ignore')
         lines = fin.readlines()
