@@ -16,6 +16,7 @@ from transformers.modeling_bert import BertPooler, BertSelfAttention
 
 
 class SelfAttention(nn.Module):
+    """Applies the self attention mechanism"""
     def __init__(self, config, opt):
         super(SelfAttention, self).__init__()
         self.opt = opt
@@ -30,6 +31,7 @@ class SelfAttention(nn.Module):
         return self.tanh(SA_out[0])
 
 class LCF_BERT(nn.Module):
+    """Applies a Local Focus Context mechanism"""
     def __init__(self, bert, opt):
         super(LCF_BERT, self).__init__()
 
@@ -45,6 +47,7 @@ class LCF_BERT(nn.Module):
         self.dense = nn.Linear(opt.bert_dim, opt.requirement_dim)
 
     def feature_dynamic_mask(self, text_local_indices, aspect_indices):
+        """Layer that masks the less-semantic-relative contextual features to focus on local context"""
         texts = text_local_indices.cpu().numpy()
         asps = aspect_indices.cpu().numpy()
         mask_len = self.opt.SRD
@@ -68,6 +71,9 @@ class LCF_BERT(nn.Module):
         return masked_text_raw_indices.to(self.opt.device)
 
     def feature_dynamic_weighted(self, text_local_indices, aspect_indices):
+        """Layer that weights the features. 
+        Features of the contextual word that is far from the targeted aspect will be reduced according to a parameter called SRD (Semantic- Relative- Distance.
+        """
         texts = text_local_indices.cpu().numpy()
         asps = aspect_indices.cpu().numpy()
         masked_text_raw_indices = np.ones((text_local_indices.size(0), self.opt.max_seq_len, self.opt.bert_dim),

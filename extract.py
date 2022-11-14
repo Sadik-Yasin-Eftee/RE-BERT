@@ -16,7 +16,6 @@ from models.lcf_bert import LCF_BERT
 from transformers import BertModel
 
 class Inferer:
-
     def __init__(self, opt):
         self.opt = opt
         self.tokenizer = Tokenizer4Bert(opt.max_seq_len, opt.pretrained_bert_name)
@@ -31,6 +30,7 @@ class Inferer:
         torch.autograd.set_grad_enabled(False)
 
     def evaluate(self, text, aspect):
+        """Prepares the data for evaluation and then returns the probabilites of the word to be a requirement"""
         aspect = aspect.lower().strip()
         text_left, _, text_right = [s.strip() for s in text.lower().partition(aspect)]
         
@@ -77,6 +77,7 @@ class Inferer:
 
 
 def get_classifier(opt):
+    """Sets up the classifier to be used for evaluation"""
     model_classes = {
         'RE_BERT': RE_BERT,
     }
@@ -95,6 +96,7 @@ def get_classifier(opt):
     return inf
 
 def fit(classifier, review=['left text', 'requirement', 'right text.']):
+    """Finds the possible requirements from the probabilities"""
     txt_review = review[0]+' '+review[1]+' '+review[2]
     txt_requirement = review[1]
     t_probs = classifier.evaluate(txt_review, txt_requirement)
@@ -105,6 +107,7 @@ def fit(classifier, review=['left text', 'requirement', 'right text.']):
     return result
 
 def get_iob(classifier,review_sentence):
+  """Tokenizes the text and prepares it for evaluation, returning the possible requirements"""
   doc = nltk.word_tokenize(review_sentence)
 
   tokens = []

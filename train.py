@@ -42,6 +42,7 @@ class Instructor:
         self._print_args()
 
     def _print_args(self):
+        """Prints the number of trainable and not trainable parameters and prints the variables"""
         n_trainable_params, n_nontrainable_params = 0, 0
         for p in self.model.parameters():
             n_params = torch.prod(torch.tensor(p.shape))
@@ -55,6 +56,7 @@ class Instructor:
             logger.info('>>> {0}: {1}'.format(arg, getattr(self.opt, arg)))
 
     def _reset_params(self):
+        """Resets the parameters that are not from the BERT model"""
         for child in self.model.children():
             if type(child) != BertModel:  # skip bert params
                 for p in child.parameters():
@@ -66,6 +68,7 @@ class Instructor:
                             torch.nn.init.uniform_(p, a=-stdv, b=stdv)
 
     def _train(self, criterion, optimizer, train_data_loader, val_data_loader):
+        """Executes the training and saves the final model"""
         max_val_acc = 0
         max_val_f1 = 0
         max_val_epoch = 0
@@ -138,6 +141,7 @@ class Instructor:
         return acc, f1'''
 
     def run(self):
+        """Defines the creterion, optimizer and the dataset to be used in the training"""
         # Loss and Optimizer
         criterion = nn.CrossEntropyLoss()
         _params = filter(lambda p: p.requires_grad, self.model.parameters())

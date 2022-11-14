@@ -9,6 +9,7 @@ from transformers.modeling_bert import BertPooler, BertSelfAttention
 from models.lcf_bert import LCF_BERT
 
 class SelfAttention(nn.Module):
+    """Applies the self attention mechanism"""
     def __init__(self, config, opt):
         super(SelfAttention, self).__init__()
         self.opt = opt
@@ -23,6 +24,7 @@ class SelfAttention(nn.Module):
         return self.tanh(SA_out[0])
 
 class RE_BERT(LCF_BERT):
+    """Child class of LCF-BERT"""
     def __init__(self, bert, opt):
         super(LCF_BERT, self).__init__()
 

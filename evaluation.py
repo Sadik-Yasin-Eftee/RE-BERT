@@ -1,12 +1,14 @@
 import numpy as np
 import pandas as pd
 
-def feature_matching(f_pred, f_true): # f_* are arrays of tokens
-
-
+def feature_matching(f_pred, f_true): 
+  """Verifies if one sequence is a subset of the other and calculates the difference in number of words between them
+  
+  Keywords arguments: 
+  f_* -- arrays of tokens
+  """
   if len(f_pred) == 0: return (False,0)
   if len(f_true) == 0: return (False,0)
-
 
   n = np.abs(len(f_pred)-len(f_true))
 
@@ -18,17 +20,22 @@ def feature_matching(f_pred, f_true): # f_* are arrays of tokens
 
   subset = False
   if(set(sub_list).issubset(set(test_list))): 
-      subset = True
+    subset = True
 
   return subset,n
 
 
-def metrics(review_f_pred,review_f_true,n): # list of predicted features
-
+def metrics(review_f_pred,review_f_true,n): 
+  """Computes the features extracted as True positive, False positive and False negative
+  
+  Keyword arguments: 
+  review_f_pred -- list of predicted features
+  review_f_true -- list of expected features
+  n -- maximum difference in number of words between them
+  """
   TP = 0
   FP = 0
   FN = 0
-
 
   # case 1 (1 predicted and 1 labeled)
   if len(review_f_pred) == len(review_f_true) and len(review_f_true)==1:
@@ -71,7 +78,14 @@ def metrics(review_f_pred,review_f_true,n): # list of predicted features
   return (TP,FP,FN)
 
 
-def f1_measure(features_extracted, features_labeled, n): # list of extracted features from reviews datadaset
+def f1_measure(features_extracted, features_labeled, n): 
+  """Prepares the inputs to calculate the metric as precision, recall and F1-score
+  
+  Keywords arguments: 
+  features_extracted -- list of extracted features from reviews dataset
+  features_labeled -- list of expected features from reviews dataset
+  n -- n -- maximum difference in number of words between them
+  """
   counter = 0
 
   if len(features_extracted)!=len(features_labeled):
@@ -86,7 +100,6 @@ def f1_measure(features_extracted, features_labeled, n): # list of extracted fea
     review_f_true = []
     for item in txt_features_extracted: review_f_pred.append( item.split(' ') )
     for item in txt_features_labeled: review_f_true.append( item.split(' ') )
-
 
     metric = metrics(review_f_pred, review_f_true, n)
     eval_statistics.append(metric)
