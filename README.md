@@ -24,7 +24,7 @@ RE-BERT is under development. There may be unknown problems in the code and we h
 
 ### Contribution of this repository 
 
-This repository introduces some changes from the original repository ([available here](https://github.com/adailtonaraujo/RE-BERT)). Unused codes has been deleted and new codes and Jupyter Notebooks have been added. These new files present a possible way to apply the cross-validation process based on multiple domains and evaluate the model according to the article "RE-BERT: Automatic Extraction of Software Requirements
+This repository introduces some changes from the original repository ([available here](https://github.com/adailtonaraujo/RE-BERT)). Unused codes have been deleted and new codes and Jupyter Notebooks have been added. These new files present a possible way to apply the cross-validation process based on multiple domains and evaluate the model according to the article "RE-BERT: Automatic Extraction of Software Requirements
 from App Reviews using BERT Language Model".
 
 * [Training models to Cross-Validation method (Notebook)](Cross_Validation.ipynb)
