@@ -2,3 +2,4 @@ numpy>=1.13.3
 torch>=0.4.0
 transformers==2.3.0
 sklearn
+urllib3>=2.2.2 # not directly required, pinned by Snyk to avoid a vulnerability
